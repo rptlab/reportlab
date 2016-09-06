@@ -198,6 +198,12 @@ class RenderSvgSimpleTestCase(unittest.TestCase):
         assert t0 == 'foo'+specialChar, "%s should equal %s" % (ascii(t0),ascii('foo'+specialChar))
         assert t1 == 'bar'
 
+    def test5(self):
+        '''tests drawToString inspired by https://bitbucket.org/egillet/ 
+        & https://bitbucket.org/johanndt/'''
+        d = Drawing(1,1)
+        self.assertTrue(isStr(renderSVG.drawToString(d)),msg='renderSVG.draweToString should return bytes')
+
     def tearDown(self):
         "When finished, make a little index page to view them in situ"
         

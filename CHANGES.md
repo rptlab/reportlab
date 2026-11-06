@@ -14,6 +14,7 @@ mentioned. If we missed you, please let us know!
 CHANGES 5.1.1    ??/11/2026
 ---------------------------
     * Fix hypenation bug; patch contributed by Matthias Kestenholz lt mk at feinheit dot ch gt
+    * fix long data: url opening that caused error in rml
 
 CHANGES 5.1.0    22/10/2026
 ---------------------------

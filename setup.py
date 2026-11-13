@@ -339,7 +339,7 @@ def main():
             ],
         
         # this probably only works for setuptools, but distutils seems to ignore it
-        install_requires=['pillow>=9.0.0','charset-normalizer'],
+        install_requires=['pillow>=13.0.0','charset-normalizer'],
         # moved to pyproject.toml
         python_requires='>=%s.%s,<4' % minPythonVersion,
         extras_require={

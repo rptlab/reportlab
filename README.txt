@@ -2,7 +2,7 @@
 README
 =====================================
 
-(C) Copyright ReportLab Europe Ltd. 2000-2023.
+(C) Copyright ReportLab Europe Ltd. 2000-2026.
 See ``LICENSE.txt`` for license details.
 
 This is the ReportLab PDF Toolkit. It allows rapid creation

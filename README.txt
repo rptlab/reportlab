@@ -79,7 +79,7 @@ Main releases are also available from the Python Package Index:
 
 The code is currently hosted in Github at:
 
-	https://github.com/rptlab/
+    https://github.com/rptlab/
 
 You can obtain the latest code from our git repository with:
 

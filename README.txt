@@ -77,16 +77,13 @@ Main releases are also available from the Python Package Index:
 
     http://pypi.python.org/
 
-The code is currently hosted in Mercurial at
-https://hg.reportlab.com/hg-public/.
+The code is currently hosted in Github at:
 
-You can obtain the latest code from our Mercurial repository with::
+	https://github.com/rptlab/
 
-    hg clone https://hg.reportlab.com/hg-public/reportlab
+You can obtain the latest code from our git repository with:
 
-A mirror only repository is available for git users at
-
-	https://github.com/MrBitBucket/reportlab-mirror
+    git clone https://github.com/rptlab/reportlab
 
 Please do not use this for issue reporting etc; use the mail list at
 
@@ -96,7 +93,6 @@ Users of our commercial libraries, and/or anyone who registers on our site,
 can also access our commercial area which has exactly the same packages,
 paired with the matching commercial ones (rlextra); it is important to keep
 both in sync.
-
 
 
 3. Documentation
@@ -122,7 +118,9 @@ become out of date.
 Tests are in the ``tests/`` directory.  They can be executed by cd'ing into the
 directory and executing ``python runAll.py``.
 
-The tests will simply try to 'import reportlab'.  Be warned that if you are not in a virtual environment, and you already have a copy of reportlab installed (which happens by default in Ubuntu 12.04 desktop), it may try to run the installed reportlab and cause permission errors as it can't generate PDF files without sudo rights.
+The tests will simply try to 'import reportlab'.  Be warned that if you are not in a virtual environment,
+and you already have a copy of reportlab installed (which happens by default in Ubuntu 12.04 desktop),
+it may try to run the installed reportlab and cause permission errors as it can't generate PDF files without sudo rights.
 
 The tests mostly produce output files with the same name as the test, but extension
 .pdf.  It is worth reviewing the list of test scripts as they provide valuable 'how

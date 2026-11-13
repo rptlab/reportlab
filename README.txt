@@ -83,7 +83,7 @@ The code is currently hosted in Github at:
 
 You can obtain the latest code from our git repository with:
 
-    git clone https://github.com/rptlab/reportlab
+    git clone https://github.com/rptlab/reportlab.git
 
 Please do not use this for issue reporting etc; use the mail list at
 

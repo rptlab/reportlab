@@ -4,9 +4,6 @@ CHANGES
 This is a summary of changes made to the reportlab source code for each release.
 Please refer to subversion backlogs (using the release dates) for more details
 or for releases which we have not provide a higher level changes list for.
-E.g. to retrieve the changes made between release 3.4 and release 3.5, type::
-
-  $ hg log -r 54ce2469ba5c
 
 The contributors lists are in no order and apologies to those accidentally not
 mentioned. If we missed you, please let us know!
@@ -15,6 +12,8 @@ CHANGES 5.1.1    ??/11/2026
 ---------------------------
     * Fix hypenation bug; patch contributed by Matthias Kestenholz lt mk at feinheit dot ch gt
     * fix long data: url opening that caused error in rml
+    * change PTOContainer ListFlowable handling
+    * fix obvious bug in Table._splitRows
 
 CHANGES 5.1.0    22/10/2026
 ---------------------------

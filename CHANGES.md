@@ -13,7 +13,8 @@ CHANGES 5.1.1    ??/11/2026
     * Fix hypenation bug; patch contributed by Matthias Kestenholz lt mk at feinheit dot ch gt
     * fix long data: url opening that caused error in rml
     * change PTOContainer ListFlowable handling
-    * fix obvious bug in Table._splitRows
+    * fix obvious bug in Table splitRows method
+    * mv endLines & endTable to end of Table.draw
 
 CHANGES 5.1.0    22/10/2026
 ---------------------------

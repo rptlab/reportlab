@@ -2394,12 +2394,12 @@ only rows may be strings with values in {_SPECIALROWS!r}''')
                             self._drawCell(cellval, cellstyle, (x, y), (width, height))
         if renderCB: renderCB(self,'startLines')
         self._drawLines()
+        if self._roundingRectDef:
+            self._restoreRoundingObscuredLines()
         if renderCB:
             renderCB(self,'endLines')
             renderCB(self,'endTable')
         c.restoreState()
-        if self._roundingRectDef:
-            self._restoreRoundingObscuredLines()
 
     def _drawBkgrnd(self):
         nrows = self._nrows

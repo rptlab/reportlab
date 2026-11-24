@@ -8,13 +8,13 @@ or for releases which we have not provide a higher level changes list for.
 The contributors lists are in no order and apologies to those accidentally not
 mentioned. If we missed you, please let us know!
 
-CHANGES 5.1.1    ??/11/2026
+CHANGES 5.1.1    24/11/2026
 ---------------------------
     * Fix hypenation bug; patch contributed by Matthias Kestenholz lt mk at feinheit dot ch gt
     * fix long data: url opening that caused error in rml
     * change PTOContainer ListFlowable handling
     * fix obvious bug in Table splitRows method
-    * mv endLines & endTable to end of Table.draw
+    * mv endLines & endTable to end of Table.draw (roundedCorners)
 
 CHANGES 5.1.0    22/10/2026
 ---------------------------

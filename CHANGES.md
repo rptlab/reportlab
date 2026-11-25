@@ -8,6 +8,10 @@ or for releases which we have not provide a higher level changes list for.
 The contributors lists are in no order and apologies to those accidentally not
 mentioned. If we missed you, please let us know!
 
+CHANGES 5.1.2    25/11/2026
+---------------------------
+    * sync with rlextra
+
 CHANGES 5.1.1    24/11/2026
 ---------------------------
     * Fix hypenation bug; patch contributed by Matthias Kestenholz lt mk at feinheit dot ch gt

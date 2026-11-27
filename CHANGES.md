@@ -8,7 +8,7 @@ or for releases which we have not provide a higher level changes list for.
 The contributors lists are in no order and apologies to those accidentally not
 mentioned. If we missed you, please let us know!
 
-CHANGES 5.1.3    ??/11/2026
+CHANGES 5.1.3    27/11/2026
 ---------------------------
     * try to prevent complex values in rl_config globals
     * rl_safe_eval prevent << or >> excessive resource usage maksymilian dot grygiel at isec dot pl

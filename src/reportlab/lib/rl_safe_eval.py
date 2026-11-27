@@ -783,10 +783,12 @@ class UntrustedAstTransformer(ast.NodeTransformer):
     def visit_BinOp(self,node):
         node = self.visit_children(node)
         op = node.op
-        if isinstance(op,(ast.Mult,ast.Add,ast.Pow)):
+        if isinstance(op,(ast.Mult,ast.Add,ast.Pow,ast.LShift,ast.RShift)):
             opf = ('__rl_mult__' if isinstance(op,ast.Mult)
                     else '__rl_add__' if isinstance(op,ast.Add)
-                    else '__rl_pow__')
+                    else '__rl_pow__' if isinstance(op,ast.Pow)
+                    else '__rl_lshift__' if isinstance(op,ast.LShift)
+                    else '__rl_rshift__')
             new_node = ast.Call(
                         func=ast.Name(opf, ast.Load()),
                             args=[node.left, node.right],
@@ -1006,6 +1008,8 @@ class __RL_SAFE_ENV__:
         __rl_builtins__['__rl_add__'] = self.__rl_add__
         __rl_builtins__['__rl_mult__'] = self.__rl_mult__
         __rl_builtins__['__rl_pow__'] = self.__rl_pow__
+        __rl_builtins__['__rl_lshift__'] = self.__rl_lshift__
+        __rl_builtins__['__rl_rshift__'] = self.__rl_rshift__
         __rl_builtins__['__rl_sd__'] = self.__rl_sd__
         __rl_builtins__['__rl_augAssign__'] = self.__rl_augAssign__
         __rl_builtins__['__rl_getitem__'] = self.__rl_getitem__
@@ -1042,6 +1046,7 @@ class __RL_SAFE_ENV__:
         __rl_builtins__['range'] = self.__rl_range__
         __rl_builtins__['set'] = self.__rl_set__
         __rl_builtins__['frozenset'] = self.__rl_frozenset__
+        __rl_builtins__['int'] = self.__rl_int__
 
     def __rl_type__(self,*args):
         if len(args)==1: return type(*args)
@@ -1111,6 +1116,10 @@ class __RL_SAFE_ENV__:
 
     def __rl_frozenset__(self, it=()):
         return frozenset(self.__rl_args_iter__(it))
+
+    def __rl_int__(self, i):
+        if abs(i)>1e100: raise BadCode(f'abs(int)>1e100')
+        return int(i)
 
     def __rl_iter_unpack_sequence__(self, it, spec, _getiter_):
         """Protect sequence unpacking of targets in a 'for loop'.
@@ -1223,8 +1232,9 @@ class __RL_SAFE_ENV__:
         return a + b
 
     def __rl_mult__(self, a, b):
-        if ((hasattr(a, '__len__') and b * len(a) > self.__rl_max_len__)
-                or (hasattr(b, '__len__') and a * len(b) > self.__rl_max_len__)):
+        if (((hasattr(a, '__len__') and b * len(a) > self.__rl_max_len__)
+                or (hasattr(b, '__len__') and a * len(b) > self.__rl_max_len__))
+                or isinstance(a,int) and isinstance(b,int) and max(abs(a),abs(b))>1e100):
             raise BadCode("excessive length")
         return a * b
 
@@ -1237,6 +1247,20 @@ class __RL_SAFE_ENV__:
             raise BadCode('%r**%r invalid or too large' % (a,b))
         return a ** b
 
+    def __rl_lshift__(self, a, b):
+        try:
+            if b>100: raise BadCode
+        except:
+            raise BadCode(f'{a!r}<<{b!r} invalid or too large')
+        return a<<b
+
+    def __rl_rshift__(self, a, b):
+        try:
+            if b>100: raise BadCode
+        except:
+            raise BadCode(f'{a!r}>>{b!r} invalid or too large')
+        return a>>b
+
     def __rl_augAssign__(self,op,v,i):
         if op=='+=': return self.__rl_add__(v,i)
         if op=='-=': return v-i
@@ -1244,8 +1268,8 @@ class __RL_SAFE_ENV__:
         if op=='/=': return v/i
         if op=='%=': return v%i
         if op=='**=': return self.__rl_pow__(v,i)
-        if op=='<<=': return v<<i
-        if op=='>>=': return v>>i
+        if op=='<<=': return self.__rl_lshift__(v,i)
+        if op=='>>=': return self.__rl_rshift__(v,i)
         if op=='|=': return v|i
         if op=='^=': return v^i
         if op=='&=': return v&i

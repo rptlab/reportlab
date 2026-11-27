@@ -1,6 +1,18 @@
 '''module that aggregates config information'''
 __all__=('_reset','register_reset')
 
+def _good_value(k,v, __allowed__=(str,float,int,bytes,complex,type(None))):
+    if isinstance(v,(list,tuple,set)):
+        for kk,vv in enumerate(v):
+            if not _good_value(f'{k}[{kk}]',vv): return False
+    elif isinstance(v,dict):
+        for kk,vv in v.items():
+            if not _good_value(f'{k}[{kk}]',vv): return False
+    elif not isinstance(v,__allowed__):
+        #raise ValueError(f'{__name__} unsafe value {v} for {k}')
+        return False
+    return True
+
 def _defaults_init():
     '''
     create & return defaults for all reportlab settings from
@@ -40,7 +52,8 @@ def _defaults_init():
                 _DEFAULTS.update(_overrides)
         except:
             pass
-    return _DEFAULTS
+
+    return {k:v for k,v in _DEFAULTS.items() if _good_value(k,v)}
 
 _DEFAULTS=_defaults_init()
 
@@ -68,7 +81,7 @@ def _setOpt(name, value, conv=None, chk=None):
     if conv: value = conv(value)
     chk = _rlChecks.get(name,None)
     if chk: chk(name,value)
-    globals()[name] = value
+    if _good_value(name,value): globals()[name] = value
 
 def _startUp():
     '''This function allows easy resetting to the global defaults

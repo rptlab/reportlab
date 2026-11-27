@@ -159,7 +159,7 @@ reserveTTFNotdef=1                                  #if true force subset elemen
                                                     #helps to fix bug in edge; this is now ignored in code
                                                     #PDFUA forbids index 0(.notdef) in strings
 documentLang=None                                   #pdf document catalog Lang value xx-xx not ee_xx
-encryptionStrength=40                               #the bits for standard encryption 40, 128 or 256 (AES)
+encryptionStrength=128                              #the bits for standard encryption 40, 128 or 256 (AES)
 trustedHosts=None                                   #set to a list of trusted for access hosts
                                                     #glob patterns eg *.reportlab.com are
                                                     #allowed. In environment use a comma separated string.

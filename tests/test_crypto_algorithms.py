@@ -51,9 +51,8 @@ class EncryptionAlgorithmTestCase(unittest.TestCase):
         self.assertEqual(hexText(userHash),'<AA154131D8FA105317F7104D2001A345D78A3DEEFA3D85D032FC9B4B35DA72A0>')
 
     def checkEncryptString40Bit(self):
-        self.assertEqual(hexText(encodePDF(unHexText('<3DC3EBDA71>'), 9, 0, 'anonymous')), '<57AC33DDEB5775982A>')
+        self.assertEqual(hexText(encodePDF(unHexText('<3DC3EBDA71>'), 9, 0, 'anonymous', revision=2)), '<57AC33DDEB5775982A>')
 
-        
     def check0wnerHash128Bit(self):
         "owner key calculation"
         ownerHash = computeO('userpass','ownerpass', revision=3)
@@ -73,11 +72,7 @@ class EncryptionAlgorithmTestCase(unittest.TestCase):
         self.assertEqual(hexText(userHash), '<A9AE45CDE827FE0B7D6536267948836A00000000000000000000000000000000>')
 
     def checkEncryptString128Bit(self):
-        self.assertEqual(hexText(encodePDF(unHexText('<3C0C5EBE0122D8EB2BDDF8A09FA8E29E>'),
-                                 9,
-                                 0,
-                                 'anonymous')
-                       ),'<27FB3E943FCF61878B>')
+        self.assertEqual(hexText(encodePDF(unHexText('<3C0C5EBE0122D8EB2BDDF8A09FA8E29E>'),9,0,'anonymous', revision=3)),'<26BC57AFB3140B9ED4>')
 
 class EyeballTestCase(unittest.TestCase):
     "This makes a gaxillion self-explanatory files"

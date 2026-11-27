@@ -85,6 +85,9 @@ class SafeEvalTestSequenceMeta(type):
                 ('rl_lib_utils',dict(mnames='reportlab')),  #test allowing some imports to be seen
                 ('rl_lib_utils.isPyPy',dict(mnames='reportlab')),
                 ('TestClass().meth2os.__name__',dict(allowed_magic_names=('__name__',))),
+                '2<<100',
+                '2>>100',
+                'int(1e100)',
                 )
                 ),
                 (
@@ -135,6 +138,10 @@ class SafeEvalTestSequenceMeta(type):
                 ('getattr(rl_lib_utils,"os").system',dict(mnames='reportlab',exception=AttributeError)),    #import reportlab, but os is disallowed attribute
                 ('TestClass.bango.system',dict(mnames='reportlab')),
                 'TestClass().meth2os()',    #returns os
+                '1<<101',
+                '1>>101',
+                'int(2e100)',
+                'int(2e100)*1',
                 )
                 ),
                 ):
@@ -226,6 +233,19 @@ class SafeExecTestBasics(unittest.TestCase):
             except BadCode:
                 blocked += 1
         self.assertEqual(blocked,2,f'{blocked=} expected 2; probably BadCode detection in FunctionDef fails')
+
+    def test_shift_ok(self):
+        ns=dict(x=1,y=1<<100)
+        expr='x<<=100\ny>>=100'
+        rl_safe_exec(expr,{},ns)
+        self.assertEqual(ns['x'],1<<100,f'{expr=!r}: x=={ns["x"]} should be {1<<100}')
+        self.assertEqual(ns['y'],1,f'{expr=!r}:y=={ns["y"]} should be 1')
+
+    def test_shift_bad(self):
+        ns=dict(x=1,y='a',z=[1], u=int(2e100), w=int(1e20))
+        for expr in ('x<<=101', 'x>>=101', 'y*=1e20', 'z*=int(1e20)', 'u*=int(1e20)', 'w*=int(1.1e100)'):
+            with self.assertRaises(BadCode, msg=f'{expr!r} fails to raise BadCode'):
+                rl_safe_exec(expr, {}, ns)
 
 class ExtendedLiteralEval(unittest.TestCase):
     def test_001(self):

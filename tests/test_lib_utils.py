@@ -207,13 +207,6 @@ class ImporterTestCase(unittest.TestCase):
         self.assertEqual(self._value,m.value)
 
     def test16(self):
-        from reportlab.lib import fontfinder
-        ff = fontfinder.FontFinder(useCache=False,recur=True)
-        ff.addDirectories(rl_config.T1SearchPath + rl_config.TTFSearchPath)
-        ff.search()
-        ff.getFamilyNames()
-
-    def test17(self):
         self.assertEqual(asUnicode(u'abc'),u'abc')
         self.assertEqual(asUnicode(b'abc'),u'abc')
         self.assertRaises(AttributeError,asUnicode,['abc'])

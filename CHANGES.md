@@ -13,6 +13,7 @@ CHANGES 5.1.3    ??/11/2026
     * try to prevent complex values in rl_config globals
     * rl_safe_eval prevent << or >> excessive resource usage maksymilian dot grygiel at isec dot pl
     * change default encryption strength to 128 maksymilian dot grygiel at isec dot pl
+    * removed fontfinder.py maksymilian dot grygiel at isec dot pl
 
 CHANGES 5.1.2    25/11/2026
 ---------------------------

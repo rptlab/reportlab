@@ -202,9 +202,6 @@ applications.
 .h2 <i>reportlab.lib.extformat</i> module
 .getModuleDoc reportlab.lib.extformat
 
-.h2 <i>reportlab.lib.fontfinder</i> module
-.getModuleDoc reportlab.lib.fontfinder
-
 .h2 <i>reportlab.lib.formatters</i> module
 .getModuleDoc reportlab.lib.formatters
 
